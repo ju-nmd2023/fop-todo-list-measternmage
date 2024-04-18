@@ -8,7 +8,7 @@ function setup(){
 
 function listContainer(){
     fill(211,211,211);
-   rect(0, 150, 500, 600);
+   rect(0, 150, 500, 700);
 }
 
 function draw(){
