@@ -2,12 +2,14 @@ let inputBox;
 let uploadButton;
 let todo = [];
 let canvasWidth = 500;
-let canvasHeight = 1000;
+let canvasHeight = 900;
 let textY = 200;
 let textX = 50;
 let lineHeight = 50;
 let checkboxSize = 30;
-let customFont;
+
+
+
 
 function setup(){
     createCanvas(canvasWidth, canvasHeight);
@@ -24,6 +26,8 @@ function setup(){
     if (savedTodo){
         todo = JSON.parse(savedTodo);
     }
+    
+    
 
     fill(0);
     textSize(30);
@@ -76,7 +80,7 @@ function draw(){
     }
 }
 
-function mouseClicked() {
+function mouseClicked() {                   //cited from chatgpt (however understood)
     for (let i = 0; i < todo.length; i++) {
         let checkboxX = textX + textWidth(todo[i].text) + 10;
         let y = textY + i * lineHeight;
