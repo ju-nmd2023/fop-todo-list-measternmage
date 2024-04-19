@@ -20,6 +20,11 @@ function setup(){
     uploadButton.position(inputBox.x + inputBox.width + 10, 800);
     uploadButton.mousePressed(addTodo);
 
+    let savedTodo = localStorage.getItem('todo');
+    if (savedTodo){
+        todo = JSON.parse(savedTodo);
+    }
+
     fill(0);
     textSize(30);
     text('To Do List', 200, 100);
@@ -30,6 +35,7 @@ function addTodo(){
     if (newTodo.trim() !== '') {
         todo.push({text: newTodo, completed: false});
         inputBox.value('');
+        localStorage.setItem('todo', JSON.stringify(todo)); 
     }
 }
 
@@ -78,15 +84,14 @@ function mouseClicked() {
         // Toggle completion
         if (mouseX > checkboxX && mouseX < checkboxX + checkboxSize && mouseY > y - checkboxSize / 2 && mouseY < y + checkboxSize / 2) {
             todo[i].completed = !todo[i].completed;
+            localStorage.setItem('todo', JSON.stringify(todo)); 
         }
 
         // Delete todo
         let deleteButtonX = checkboxX + checkboxSize + 10;
         if (mouseX > deleteButtonX && mouseX < deleteButtonX + checkboxSize && mouseY > y - checkboxSize / 2 && mouseY < y + checkboxSize / 2) {
             todo.splice(i, 1);
+            localStorage.setItem('todo', JSON.stringify(todo)); 
         }
     }
 }
-
-
-

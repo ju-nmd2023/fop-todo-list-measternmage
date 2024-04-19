@@ -1,5 +1,5 @@
 body {
-    background-color: aqua;
+    background-image: url(page.jpg);
     display: flex;
     justify-content: center;
     align-items: center;
