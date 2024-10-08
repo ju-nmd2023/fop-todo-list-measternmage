@@ -16,6 +16,8 @@ function setup() {
   addButton.position(700, 800);
   addButton.mousePressed(addTask);
 
+  loadTasks();
+
   textAlign(LEFT, TOP);
   textSize(24);
 }
@@ -42,15 +44,18 @@ function addTask() {
   if (task) {
     tasks.push({ text: task, isCompleted: false });
     inputBox.value(''); 
+    saveTasks();
   }
 }
 
 function markAsCompleted(index) {
   tasks[index].isCompleted = true;
+  saveTasks(); 
 }
 
 function deleteTask(index) {
   tasks.splice(index, 1);
+  saveTasks(); 
 }
 
 function mousePressed() {
@@ -65,6 +70,17 @@ function mousePressed() {
     if (mouseX > 800 && mouseX < 820 && mouseY > taskY && mouseY < taskY + 30) {
       deleteTask(i);
     }
+  }
+}
+
+function saveTasks() {
+  localStorage.setItem('tasks', JSON.stringify(tasks)); 
+}
+
+function loadTasks() {
+  let savedTasks = localStorage.getItem('tasks');
+  if (savedTasks) {
+    tasks = JSON.parse(savedTasks); 
   }
 }
 
