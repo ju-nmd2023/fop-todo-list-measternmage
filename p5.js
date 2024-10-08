@@ -2,43 +2,65 @@ let width = 1000;
 let height = 1000;
 let tasks = []; 
 let inputBox, addButton;
+let checkButtonX = 750;
+let deleteButtonX = 800; 
 
 function setup() {
   createCanvas(width, height);
   background(150);
 
-  
   inputBox = createInput();
-  inputBox.position(500, 800); 
+  inputBox.position(500, 800);
 
-  
   addButton = createButton('Add Task');
-  addButton.position(700,800);
-  addButton.mousePressed(addTask); 
+  addButton.position(700, 800);
+  addButton.mousePressed(addTask);
 
-  
   textAlign(LEFT, TOP);
   textSize(24);
-  fill(0);
 }
 
 function displayTasks() {
-    let startY = 50; 
-    for (let i = 0; i < tasks.length; i++) {
-      text((i + 1) + '. ' + tasks[i], 500, startY + i * 30); 
+  let startY = 50;
+  for (let i = 0; i < tasks.length; i++) {
+    let task = tasks[i];
+    if (task.isCompleted) {
+      fill(0, 255, 0);
+    } else {
+      fill(0); 
     }
+
+    text((i + 1) + '. ' + task.text, 500, startY + i * 30);
+    fill(0); 
+    text('✔', checkButtonX, startY + i * 30 + 8); 
   }
+}
 
 function addTask() {
-  let task = inputBox.value(); 
+  let task = inputBox.value();
   if (task) {
-    tasks.push(task); 
+    tasks.push({ text: task, isCompleted: false });
     inputBox.value(''); 
   }
 }
-  function draw() {
-    background(150); 
-    displayTasks(); 
-  } 
-  
-  
+
+function markAsCompleted(index) {
+  tasks[index].isCompleted = true;
+}
+
+
+function mousePressed() {
+  let startY = 50; 
+  for (let i = 0; i < tasks.length; i++) {
+    let taskY = startY + i * 30;
+
+    if (mouseX > 750 && mouseX < 770 && mouseY > taskY && mouseY < taskY + 30) {
+      markAsCompleted(i);
+    }
+  }
+}
+
+function draw() {
+  background(150); 
+  displayTasks();  
+}
