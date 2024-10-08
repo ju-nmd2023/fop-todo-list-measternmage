@@ -33,6 +33,7 @@ function displayTasks() {
     text((i + 1) + '. ' + task.text, 500, startY + i * 30);
     fill(0); 
     text('✔', checkButtonX, startY + i * 30 + 8); 
+    text('X', deleteButtonX, startY + i * 30 + 8); 
   }
 }
 
@@ -48,6 +49,9 @@ function markAsCompleted(index) {
   tasks[index].isCompleted = true;
 }
 
+function deleteTask(index) {
+  tasks.splice(index, 1);
+}
 
 function mousePressed() {
   let startY = 50; 
@@ -56,6 +60,10 @@ function mousePressed() {
 
     if (mouseX > 750 && mouseX < 770 && mouseY > taskY && mouseY < taskY + 30) {
       markAsCompleted(i);
+    }
+
+    if (mouseX > 800 && mouseX < 820 && mouseY > taskY && mouseY < taskY + 30) {
+      deleteTask(i);
     }
   }
 }
