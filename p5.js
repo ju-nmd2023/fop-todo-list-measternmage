@@ -23,7 +23,7 @@ function setup() {
 }
 
 function displayTasks() {
-  let startY = 50;
+  let startY = 60;
   for (let i = 0; i < tasks.length; i++) {
     let task = tasks[i];
     if (task.isCompleted) {
